@@ -1,2 +1,2 @@
 django==3.2.12
-django-allauth==0.46.0
+django-allauth
