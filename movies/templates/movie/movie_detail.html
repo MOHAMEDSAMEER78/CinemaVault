@@ -1,0 +1,8 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+<h2>{{ movie.title }}</h2>
+<img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+<p>{{ movie.description }}</p>
+<p>Released: {{ movie.release_date }}</p>
+<a href="{% url 'add_to_list' movie.imdb_id %}">Add to List</a>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0;
+            color: #fff;
+        }
+
+        .nav-pills .nav-link {
+            color: #fff;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link:hover {
+            background-color: transparent;
+            color: #ffffff;
+        }
+
+        main {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="my-4">Movie Library</h1>
+            <nav class="nav justify-content-center nav-pills">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                <a class="nav-link" href="{% url 'search' %}">Search Movies</a>
+                <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container my-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

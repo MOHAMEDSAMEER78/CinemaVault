@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+    Movie List
+{% endblock %}
+
+{% block content %}
+    <h1>{{ movie_list.name }}</h1>
+    <p>Created by: {{ movie_list.user.username }}</p>
+    <ul>
+        {% for movie in movie_list.movies.all %}
+            <li style="color: #e2bf7a; font-size: 25px;">{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
