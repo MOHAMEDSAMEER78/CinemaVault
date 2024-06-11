@@ -1,0 +1,12 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+<h2>Create New List</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="name">List Name:</label>
+    <input type="text" id="name" name="name">
+    <label for="is_public">Public:</label>
+    <input type="checkbox" id="is_public" name="is_public">
+    <button type="submit">Create</button>
+</form>
+{% endblock %}

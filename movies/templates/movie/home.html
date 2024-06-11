@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+<h2>Your Movie Lists</h2>
+<ul>
+    {% for list in movie_lists %}
+    <li><a href="{% url 'view_list' list.id %}">{{ list.name }}</a> - {% if list.is_public %}Public{% else %}Private{% endif %}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_list' %}">Create a new list</a>
+{% endblock %}
