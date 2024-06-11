@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+    margin: 2rem;
+  }
+  
+  header {
+    background-color: #ddd;
+    padding: 1rem;
+  }
+  
+  header h1 {
+    text-align: center;
+  }
+  
+  header nav {
+    text-align: center;
+  }
+  
+  header nav a {
+    text-decoration: none;
+    color: black;
+    margin: 1rem;
+  }
+  
+  main {
+    border: 1px solid #ddd;
+    padding: 1rem;
+  }
+  
