@@ -24,7 +24,7 @@ This is a web application that allows users to search for movies and view detail
 ## Installation
 1. Clone the repository
 2. Create a virtual environment using `python3 -m venv venv`
-3. Activate the virtual environment using `venv\Scripts\activate` on Windows or `source mvenv/bin/activate` on MacOS/Linux
+3. Activate the virtual environment using `venv\Scripts\activate` on Windows or `source venv/bin/activate` on MacOS/Linux
 4. Install the required packages using `pip install -r requirements.txt`
 5. Run the application using `python3 manage.py runserver`
 
