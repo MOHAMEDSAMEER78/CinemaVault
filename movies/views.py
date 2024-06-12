@@ -6,22 +6,6 @@ import requests
 
 OMDB_API_KEY = 'f45324e4'
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-
-def signup_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()  # Save the new user
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}! You can now log in.')
-            return redirect('account_login')  # Redirect to login URL
-    else:
-        form = UserCreationForm()
-    return render(request, 'account/signup.html', {'form': form})
-
 @login_required
 def home(request):
     movie_lists = MovieList.objects.filter(user=request.user)
