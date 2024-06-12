@@ -1,10 +1,28 @@
-{% extends 'base_generic.html' %}
-{% block content %}
-<h2>Your Movie Lists</h2>
-<ul>
-    {% for list in movie_lists %}
-    <li><a href="{% url 'view_list' list.id %}">{{ list.name }}</a> - {% if list.is_public %}Public{% else %}Private{% endif %}</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'create_list' %}">Create a new list</a>
-{% endblock %}
+    {% extends 'base_generic.html' %}
+    {% block content %}
+    <style>
+        .delete-button {
+            color: red; 
+            background: none;
+            border: none; 
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+    <h2>Your Movie Lists</h2>
+    <ul>
+        {% for list in movie_lists %}
+        <li>
+            <a href="{% url 'view_list' list.id %}">{{ list.name }}</a> - 
+            {% if list.is_public %}Public{% else %}Private{% endif %}
+            <!-- Delete form -->
+            <form action="{% url 'list_delete' list.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this list?');">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_list' %}">Create a new list</a>
+    {% endblock %}
