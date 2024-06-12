@@ -10,5 +10,4 @@ urlpatterns = [
     path('list/<int:list_id>/', views.view_list, name='view_list'),
     path('movie/delete/<int:movie_id>/', views.delete_movie, name='movie_delete'),
     path('list/delete/<int:list_id>/', views.delete_list, name='list_delete'),
-    path('login/', views.login, name='login'),
 ]

@@ -1,33 +1,14 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Movie, MovieList
 import requests
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
 from django.http import HttpResponseForbidden
 
 OMDB_API_KEY = 'f45324e4'
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request, 'Username or password is not correct')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'account/login.html', {'form': form})
 
 @login_required
 def home(request):
