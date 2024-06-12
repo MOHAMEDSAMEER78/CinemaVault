@@ -8,4 +8,7 @@ urlpatterns = [
     path('create_list/', views.create_list, name='create_list'),
     path('add_to_list/<str:imdb_id>/', views.add_to_list, name='add_to_list'),
     path('list/<int:list_id>/', views.view_list, name='view_list'),
+    path('movie/delete/<int:movie_id>/', views.delete_movie, name='movie_delete'),
+    path('list/delete/<int:list_id>/', views.delete_list, name='list_delete'),
+    path('login/', views.login, name='login'),
 ]

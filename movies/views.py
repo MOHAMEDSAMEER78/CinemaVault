@@ -1,10 +1,33 @@
-# movies/views.py
-from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Movie, MovieList
 import requests
+from django.urls import reverse
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 OMDB_API_KEY = 'f45324e4'
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Username or password is not correct')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'account/login.html', {'form': form})
 
 @login_required
 def home(request):
@@ -69,8 +92,16 @@ def delete_list(request, list_id):
     return redirect('home')
 
 @login_required
-def remove_from_list(request, list_id, imdb_id):
-    movie = Movie.objects.get(imdb_id=imdb_id)
-    movie_list = MovieList.objects.get(id=list_id)
-    movie_list.movies.remove(movie)
-    return redirect('view_list', list_id)
+def delete_movie(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    movie_lists = MovieList.objects.filter(movies=movie)
+    user_is_owner = any(request.user == movie_list.user for movie_list in movie_lists)
+
+    if user_is_owner:
+        for movie_list in movie_lists:
+            movie_list.movies.remove(movie)
+        if not MovieList.objects.filter(movies=movie).exists():
+            movie.delete()
+        return redirect('home')  
+    else:
+        return HttpResponseForbidden("You do not have permission to delete this movie.")
